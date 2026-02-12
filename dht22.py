@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# /// script
+# requires-python = ">=3.9"
+# dependencies = ["adafruit-circuitpython-bmp280", "adafruit-blinka", "rpi.gpio", "adafruit-circuitpython-dht"]
+# ///
 """
 Lecture du capteur de température et d'humidité DHT22.
 
@@ -30,11 +34,11 @@ def lire_temperature():
         float: Température en °C, ou None si erreur
     """
     # TODO : Créer l'objet capteur DHT22
-    # dht = DHT_SENSOR(DHT_PIN)
+    dht = DHT_SENSOR(DHT_PIN)
 
     try:
         # TODO : Lire et retourner la température
-        # return dht.temperature
+        return dht.temperature
         pass
     except RuntimeError as e:
         print(f"Erreur de lecture: {e}")
@@ -48,7 +52,14 @@ def lire_humidite():
         float: Humidité relative en %RH, ou None si erreur
     """
     # TODO : Lire et retourner l'humidité
-    pass
+    try:
+        dht = DHT_SENSOR(DHT_PIN)   # créer l'objet capteur
+        humidite = dht.humidity     # lire humidité
+
+        if humidite is not None:
+            return humidite
+    except:
+        pass
 
 def afficher_mesures():
     """Affiche les mesures de température et d'humidité."""
